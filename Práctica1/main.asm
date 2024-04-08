@@ -1,59 +1,41 @@
-.model small
+.model medium
 .stack
 .data
-    msg1 db "A", "$"
-    msg2 db "B", "$"
-    msg3 db "C", "$"
+    menuPrin1 db "+-------------------------+", 0Dh, 0Ah, "$"
+    menuPrin2 db "| MENU PRINCIPAL          |", 0Dh, 0Ah, "$"
+    menuPrin3 db "+-------------------------+", 0Dh, 0Ah, "$"
+    menuPrin4 db "| 1. Nuevo Juego          |", 0Dh, 0Ah, "$"
+    menuPrin5 db "| 2. Animacion            |", 0Dh, 0Ah, "$"
+    menuPrin6 db "| 3. Informacion          |", 0Dh, 0Ah, "$"
+    menuPrin7 db "| 4. Salir                |", 0Dh, 0Ah, "$"
+    menuPrin8 db "+-------------------------+", 0Dh, 0Ah, "$"
+    menuPrin9 db "Seleccione una opcion: ", 0Dh, 0Ah, "$"
     user_input db ?
-
-    menuPrin1 db "+-------------------------+"
-    menuPrin2 db "| Menú Principal          |"
-    menuPrin3 db "+-------------------------+"
-    menuPrin4 db "| 1. Nuevo Juego          |"
-    menuPrin5 db "| 2. Animación            |"
-    menuPrin6 db "| 3. Información          |"
-    menuPrin7 db "| 4. Salir                |"
-    menuPrin8 db "+-------------------------+"
 .code
 main PROC
-    ; Imprimir el primer mensaje
-    MOV AX, SEG msg1
+    ; Imprimir el menú
+    MOV AX, SEG menuPrin1
     MOV DS, AX
     MOV AH,09H
-    LEA DX,msg1
+    LEA DX,menuPrin1
     INT 21H
-    ; Imprimir un salto de línea
-    MOV AH, 02H
-    MOV DL, 0AH ; código ASCII para LF
+    LEA DX,menuPrin2
     INT 21H
-    MOV DL, 0DH ; código ASCII para CR
+    LEA DX,menuPrin3
+    INT 21H
+    LEA DX,menuPrin4
+    INT 21H
+    LEA DX,menuPrin5
+    INT 21H
+    LEA DX,menuPrin6
+    INT 21H
+    LEA DX,menuPrin7
+    INT 21H
+    LEA DX,menuPrin8
+    INT 21H
+    LEA DX,menuPrin9
     INT 21H
 
-    ; Imprimir el segundo mensaje
-    MOV AX, SEG msg2
-    MOV DS, AX
-    MOV AH,09H
-    LEA DX,msg2
-    INT 21H
-    ; Imprimir un salto de línea
-    MOV AH, 02H
-    MOV DL, 0AH ; código ASCII para LF
-    INT 21H
-    MOV DL, 0DH ; código ASCII para CR
-    INT 21H
-
-    ; Imprimir el tercer mensaje
-    MOV AX, SEG msg3
-    MOV DS, AX
-    MOV AH,09H
-    LEA DX,msg3
-    INT 21H
-    ; Imprimir un salto de línea
-    MOV AH, 02H
-    MOV DL, 0AH ; código ASCII para LF
-    INT 21H
-    MOV DL, 0DH ; código ASCII para CR
-    INT 21H
 
     ; Leer un carácter del usuario
     MOV AH, 01H
